@@ -26,14 +26,18 @@ jobs:
         id: init
         run: terraform init -backend-config="bucket=$TF_STATE_BUCKET_NAME" -backend-config="region=us-east-1"
         working-directory: ./terraform
+      - name: Debug Environment Variables (Non-Sensitive)
+        run: |
+          echo "AWS Region: $AWS_REGION"
+          echo "Key Name: deployer-key"
       - name: Terraform plan
         id: plan
         run: |-
           terraform plan \
-          -var="region=us-east-1"
-          -var="public_key=PUBLIC_SSH_KEY" \
-          -var="private_key=PRIVATE_SSH_KEY" \
-          -var="key_name=deployer-key"
+          -var="region=$AWS_REGION" \
+          -var="public_key=$PUBLIC_SSH_KEY" \
+          -var="private_key=$PRIVATE_SSH_KEY" \
+          -var="key_name=deployer-key" \
           -out=PLAN
         working-directory: ./terraform
       - name: Terraform apply
