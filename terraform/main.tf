@@ -90,7 +90,7 @@ resource "aws_security_group" "maingroup" {
       from_port        = 3000
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
-      protocol         = "other"
+      protocol         = "tcp"
       security_groups  = []
       self             = false
       to_port          = 3000
