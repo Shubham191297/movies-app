@@ -26,20 +26,17 @@ jobs:
         id: init
         run: terraform init -backend-config="bucket=$TF_STATE_BUCKET_NAME" -backend-config="region=us-east-1"
         working-directory: ./terraform
-      # - name: Terraform plan
-      #   id: plan
-      #   run: |-
-      #     terraform plan \
-      #     -var="region=$AWS_REGION" \
-      #     -var="public_key=$PUBLIC_SSH_KEY" \
-      #     -var="private_key=$PRIVATE_SSH_KEY" \
-      #     -var="key_name=deployer-key" \
-      #     -out=PLAN
-      #   working-directory: ./terraform
-      - name: destroy
-        id: destroy
-        run: terraform destroy
-      # - name: Terraform apply
-      #   id: apply
-      #   run: terraform apply PLAN
-      #   working-directory: ./terraform
+      - name: Terraform plan
+        id: plan
+        run: |-
+          terraform plan \
+          -var="region=$AWS_REGION" \
+          -var="public_key=$PUBLIC_SSH_KEY" \
+          -var="private_key=$PRIVATE_SSH_KEY" \
+          -var="key_name=deployer-key" \
+          -out=PLAN
+        working-directory: ./terraform
+      - name: Terraform apply
+        id: apply
+        run: terraform apply PLAN
+        working-directory: ./terraform
