@@ -56,7 +56,7 @@ resource "aws_iam_instance_profile" "ec2-profile" {
 }
 
 resource "aws_security_group" "maingroup" {
-  vpc_id = aws_vpc.default.id
+  vpc_id = data.aws_vpc.default.id
   egress = [
     {
       cidr_blocks      = ["0.0.0.0/0"]
