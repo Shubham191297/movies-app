@@ -42,7 +42,12 @@ jobs:
       #   working-directory: ./terraform
       - name: delete
         id: destroy
-        run: terraform destroy PLAN
+        run: |-
+          terraform destroy \
+          -var="region=$AWS_REGION" \
+          -var="public_key=$PUBLIC_SSH_KEY" \
+          -var="private_key=$PRIVATE_SSH_KEY" \
+          -var="key_name=deployer-key" \
         working-directory: ./terraform
   # deploy-app:
   #   runs-on: ubuntu-latest
