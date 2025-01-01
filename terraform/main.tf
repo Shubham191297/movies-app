@@ -14,7 +14,7 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_instance" "name" {
+resource "aws_instance" "server" {
   ami                    = "ami-05d38da78ce859165"
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.movieappkey.key_name
