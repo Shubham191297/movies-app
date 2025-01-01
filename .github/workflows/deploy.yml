@@ -42,7 +42,7 @@ jobs:
       #   working-directory: ./terraform
       - name: delete
         id: destroy
-        run: terraform destroy
+        run: terraform destroy PLAN
         working-directory: ./terraform
   # deploy-app:
   #   runs-on: ubuntu-latest
