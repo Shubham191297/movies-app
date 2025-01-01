@@ -14,14 +14,6 @@ provider "aws" {
   region = var.region
 }
 
-data "aws_vpc" "default" {
-  default = true
-}
-
-# Automatically use the default subnet
-data "aws_subnet" "default" {
-  vpc_id = data.aws_vpc.default.id
-}
 
 # resource "aws_vpc" "main_vpc" {
 #   cidr_block           = "10.0.0.0/16"
@@ -56,7 +48,7 @@ resource "aws_iam_instance_profile" "ec2-profile" {
 }
 
 resource "aws_security_group" "maingroup" {
-  vpc_id = data.aws_vpc.default.id
+  # vpc_id = data.aws_vpc.default.id
   egress = [
     {
       cidr_blocks      = ["0.0.0.0/0"]
