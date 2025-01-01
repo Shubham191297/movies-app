@@ -37,8 +37,6 @@ jobs:
           -out=PLAN
         working-directory: ./terraform
       - name: Terraform apply
-        id: replace
-        run: terraform state rm aws_iam_instance_profile.ec2-profile
-      - name: Terraform destroy
-        id: destroy
-        run: terraform destroy
+        id: apply
+        run: terraform apply PLAN
+        working-directory: ./terraform
