@@ -28,6 +28,7 @@ jobs:
         working-directory: ./terraform
       - name: hi
         run: terraform state rm aws_iam_instance_profile.ec2-profile
+        working-directory: ./terraform
       # - name: Terraform plan
       #   id: plan
       #   run: |-
