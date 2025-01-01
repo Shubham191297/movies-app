@@ -28,7 +28,6 @@ resource "aws_instance" "server" {
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.movieappkey.key_name
   vpc_security_group_ids = [aws_security_group.maingroup.id]
-  vpc_id                 = aws_vpc.main_vpc.id
   iam_instance_profile   = aws_iam_instance_profile.ec2-profile.name
   connection {
     type        = "ssh"
