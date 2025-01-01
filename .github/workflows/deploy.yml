@@ -26,10 +26,9 @@ jobs:
         id: init
         run: terraform init -backend-config="bucket=$TF_STATE_BUCKET_NAME" -backend-config="region=us-east-1"
         working-directory: ./terraform
-      - name: Debug Environment Variables (Non-Sensitive)
-        run: |
-          echo "AWS Region: $AWS_REGION"
-          echo "Key Name: deployer-key"
+      - name: refresh
+        id: refresh
+        run: terraform refresh
       - name: Terraform plan
         id: plan
         run: |-

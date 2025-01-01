@@ -15,14 +15,14 @@ provider "aws" {
 }
 
 
-# resource "aws_vpc" "main_vpc" {
-#   cidr_block           = "10.0.0.0/16"
-#   enable_dns_support   = true
-#   enable_dns_hostnames = true
-#   tags = {
-#     Name = "Main-VPC"
-#   }
-# }
+resource "aws_vpc" "main_vpc" {
+  cidr_block           = "10.0.0.0/16"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
+  tags = {
+    Name = "Main-VPC"
+  }
+}
 
 resource "aws_instance" "server" {
   ami                    = "ami-0e2c8caa4b6378d8c"
@@ -48,7 +48,7 @@ resource "aws_iam_instance_profile" "ec2-profile" {
 }
 
 resource "aws_security_group" "maingroup" {
-  # vpc_id = data.aws_vpc.default.id
+  vpc_id = aws_vpc.main_vpc.id
   egress = [
     {
       cidr_blocks      = ["0.0.0.0/0"]
