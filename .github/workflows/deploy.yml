@@ -26,9 +26,9 @@ jobs:
         id: init
         run: terraform init -backend-config="bucket=$TF_STATE_BUCKET_NAME" -backend-config="region=us-east-1"
         working-directory: ./terraform
-      - name: refresh
-        id: refresh
-        run: terraform refresh
+      - name: destroy
+        id: destroy
+        run: terraform destroy
       - name: Terraform plan
         id: plan
         run: |-
