@@ -36,19 +36,19 @@ jobs:
           -var="key_name=deployer-key" \
           -out=PLAN
         working-directory: ./terraform
-      # - name: Terraform apply
-      #   id: apply
-      #   run: terraform apply PLAN
-      #   working-directory: ./terraform
-      - name: delete
-        id: destroy
-        run: |-
-          terraform destroy \
-          -var="region=$AWS_REGION" \
-          -var="public_key=$PUBLIC_SSH_KEY" \
-          -var="private_key=$PRIVATE_SSH_KEY" \
-          -var="key_name=deployer-key" \
-          --auto-approve
+      - name: Terraform apply
+        id: apply
+        run: terraform apply PLAN
         working-directory: ./terraform
+      # - name: delete
+      #   id: destroy
+      #   run: |-
+      #     terraform destroy \
+      #     -var="region=$AWS_REGION" \
+      #     -var="public_key=$PUBLIC_SSH_KEY" \
+      #     -var="private_key=$PRIVATE_SSH_KEY" \
+      #     -var="key_name=deployer-key" \
+      #     --auto-approve
+      #   working-directory: ./terraform
   # deploy-app:
   #   runs-on: ubuntu-latest
