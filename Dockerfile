@@ -7,4 +7,4 @@ RUN sudo apt-get install npm -y
 RUN npm install
 COPY . .
 EXPOSE 3000
-CMD ["npm","start"]
+CMD ["npm", "run","start"]
