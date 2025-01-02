@@ -7,5 +7,4 @@ RUN sudo apt-get install npm -y
 RUN npm install
 COPY . .
 EXPOSE 3000
-WORKDIR /usr/app/src/
 CMD ["npm","start"]
