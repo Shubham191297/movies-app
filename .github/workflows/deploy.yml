@@ -48,7 +48,8 @@ jobs:
       - name: Set outputs
         id: set-ip
         run: |-
-          echo "instance_public_ip=$(terraform output instance_public_ip)" >> $GITHUB_ENV
+          INSTANCE_IP=$(terraform output instance_public_ip)
+          echo $INSTANCE_IP
       # - name: delete
       #   id: destroy
       #   run: |-
