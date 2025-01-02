@@ -45,7 +45,7 @@ jobs:
       - name: Set outputs
         id: set-ip
         run: |-
-          echo "::set-output name=instance_public_ip::$(terraform output instance_public_ip)"
+          echo "instance_public_ip=$(terraform output instance_public_ip)" >> $GITHUB_ENV
       # - name: delete
       #   id: destroy
       #   run: |-
@@ -76,7 +76,7 @@ jobs:
         run: |-
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-        working-directory: ./movies-app
+        working-directory: .
       - name: Deploy docker image to EC2
         env:
           REGISTRY: ${{steps.login-ecr.outputs.registry}}
