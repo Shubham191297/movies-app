@@ -44,7 +44,7 @@ jobs:
         working-directory: ./terraform
       - name: Set outputs
         id: set-ip
-        run: echo "::set-output name=instance_public_ip::$(terraform output instance_public_ip)" >> $GITHUB_ENV
+        run: echo "::set-output name=instance_public_ip::$(terraform output instance_public_ip)"
         working-directory: ./terraform
       - name: check output
         run: echo $GITHUB_ENV
