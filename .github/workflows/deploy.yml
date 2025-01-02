@@ -38,17 +38,17 @@ jobs:
           -var="key_name=deployer-key" \
           -out=PLAN
         working-directory: ./terraform
-      - name: Verify Terraform outputs
-        run: terraform output instance_public_ip
-        working-directory: ./terraform
       - name: Terraform apply
         id: apply
         run: terraform apply PLAN
         working-directory: ./terraform
+      - name: Verify Terraform outputs
+        run: terraform output instance_public_ip
+        working-directory: ./terraform
       - name: Set outputs
         id: set-ip
         run: |-
-          echo "instance_public_ip=$(terraform output instance_public_ip)"
+          echo "instance_public_ip=$(terraform output instance_public_ip)" >> $GITHUB_ENV
       # - name: delete
       #   id: destroy
       #   run: |-
