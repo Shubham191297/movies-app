@@ -106,5 +106,5 @@ resource "aws_key_pair" "movieappkey" {
 
 output "instance_public_ip" {
   value     = aws_instance.server.public_ip
-  sensitive = false
+  sensitive = true
 }
