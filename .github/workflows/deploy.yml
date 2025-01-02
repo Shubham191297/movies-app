@@ -74,7 +74,7 @@ jobs:
           REGISTRY: ${{steps.login-ecr.outputs.registry}}
           REPOSITORY: movies-app
           IMAGE_TAG: ${{github.sha}}
-          AWS_DEFAULT_REGION: use-east-1
+          AWS_DEFAULT_REGION: us-east-1
         uses: appleboy/ssh-action@master
         with:
           host: ${{env.SERVER_PUBLIC_IP}}
