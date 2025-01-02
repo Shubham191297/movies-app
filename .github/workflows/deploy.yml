@@ -42,14 +42,10 @@ jobs:
         id: apply
         run: terraform apply PLAN
         working-directory: ./terraform
-      - name: Verify Terraform outputs
-        run: terraform output instance_public_ip
-        working-directory: ./terraform
       - name: Set outputs
         id: set-ip
         run: |-
-          INSTANCE_IP=$(terraform output instance_public_ip)
-          echo $INSTANCE_IP
+          echo "instance_public_ip=$(terraform output instance_public_ip)" >> $GITHUB_ENV
       # - name: delete
       #   id: destroy
       #   run: |-
