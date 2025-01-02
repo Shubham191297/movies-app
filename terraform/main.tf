@@ -14,21 +14,22 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_vpc" "main_vpc" {
-  cidr_block           = "10.0.0.0/16"
-  enable_dns_support   = true
-  enable_dns_hostnames = true
-  tags = {
-    Name = "Main-VPC"
-  }
-}
+
+# resource "aws_vpc" "main_vpc" {
+#   cidr_block           = "10.0.0.0/16"
+#   enable_dns_support   = true
+#   enable_dns_hostnames = true
+#   tags = {
+#     Name = "Main-VPC"
+#   }
+# }
 
 resource "aws_instance" "server" {
-  ami                    = "ami-05d38da78ce859165"
+  ami                    = "ami-0e2c8caa4b6378d8c"
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.movieappkey.key_name
   vpc_security_group_ids = [aws_security_group.maingroup.id]
-  iam_instance_profile   = aws_iam_instance_profile.EC2-ECR-AUTH.name
+  iam_instance_profile   = "EC2-ECR-AUTH"
   connection {
     type        = "ssh"
     host        = self.public_ip
@@ -41,13 +42,13 @@ resource "aws_instance" "server" {
   }
 }
 
-# resource "aws_iam_instance_profile" "ec2-profile" {
-#   name = "ec2-profile"
+# resource "aws_iam_instance_profile" "app-role" {
+#   name = "app-role"
 #   role = "EC2-ECR-AUTH"
 # }
 
 resource "aws_security_group" "maingroup" {
-  vpc_id = aws_vpc.main_vpc.id
+  # vpc_id = aws_vpc.main_vpc.id
   egress = [
     {
       cidr_blocks      = ["0.0.0.0/0"]
